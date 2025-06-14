@@ -1,0 +1,32 @@
+import cv2
+
+# Step 1: Open the default webcam (0)
+cap = cv2.VideoCapture('C:/Users/mcven/OneDrive/Desktop/My-Chapter/images2/sample2.mp4')
+
+# Choose the playback speed mode: 'normal', 'slow', 'fast'
+mode = 'fast'  # Change to 'normal' or 'fast'
+
+# Step 2: Set waitKey delay based on mode
+if mode == 'normal':
+    delay = 70     # ~30 frames per second
+elif mode == 'slow':
+    delay = 180    # slower (fewer frames per second)
+elif mode == 'fast':
+    delay = 1    # faster playback
+
+# Step 3: Capture and display video
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Failed to capture frame. Exiting...")
+        break
+
+    cv2.imshow('Webcam Video (' + mode + ' motion)', frame)
+
+    # Exit when 'q' is pressed
+    if cv2.waitKey(delay) & 0xFF == ord('q'):
+        break
+
+# Step 4: Release resources
+cap.release()
+cv2.destroyAllWindows()
