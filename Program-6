@@ -1,0 +1,30 @@
+import cv2
+
+# Step 1: Load video (0 = default webcam, or give a filename)
+cap = cv2.VideoCapture('C:/Users/mcven/OneDrive/Desktop/My-Chapter/images2/sample2.mp4')  # Use 'video.mp4' to load from file
+
+# Choose mode: 'normal', 'slow', or 'fast'
+mode = 'slow'  # Change to 'normal' or 'fast'
+
+# Step 2: Set delay based on mode
+if mode == 'normal':
+    delay = 30      # ~30 FPS
+elif mode == 'slow':
+    delay = 100     # slower (lower FPS)
+elif mode == 'fast':
+    delay = 5       # faster (higher FPS)
+
+# Step 3: Read and display frames
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    cv2.imshow('Video Playback', frame)
+
+    if cv2.waitKey(delay) & 0xFF == ord('q'):
+        break
+
+# Step 4: Release resources
+cap.release()
+cv2.destroyAllWindows()
